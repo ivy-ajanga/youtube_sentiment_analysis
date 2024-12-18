@@ -6,12 +6,17 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 import nltk
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+from dotenv import load_dotenv
+import os
 
 # Download NLTK dependencies
 nltk.download('vader_lexicon')
 
-# Your YouTube API Key
-API_KEY = 'AIzaSyAJM8jCqTsHhc9A9mLT04e0Svwkh_k2kFo'
+# Load the environment variables from the .env file
+load_dotenv()
+
+# Get the API key from the environment
+API_KEY = os.getenv('YOUTUBE_API_KEY')
 
 # Function to extract video ID from YouTube URL
 def extract_video_id(url):
@@ -52,7 +57,7 @@ def analyze_sentiment(comments):
 st.title("YouTube Comment Sentiment Analysis")
 
 # Input: YouTube URL
-video_url = st.text_input("Paste the YouTube video URL here:", "https://www.youtube.com/watch?v=6uKNpCVdtCw")
+video_url = st.text_input("Paste the YouTube video URL here:", "")
 
 if video_url:
     video_id = extract_video_id(video_url)
